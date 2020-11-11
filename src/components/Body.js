@@ -5,8 +5,9 @@ import Suggested from "./Suggested";
 
 export default function Body() {
   const [suggest, setSuggest] = useState([]);
+  const [newPost, setNewPost] = useState("");
   useEffect(() => {
-    db.collection("news").onSnapshot(snapshot =>
+    db.collection("news").get().then(snapshot =>
       setSuggest(
         snapshot.docs.map(doc => ({
           id: doc.id,
@@ -15,20 +16,24 @@ export default function Body() {
       )
     );
   }, []);
-
+  function setPost(postId) {
+    setNewPost(postId);
+  }
   return (
     <div className="body">
       <div className="post">
-        <Post />
+        <Post id={newPost}/>
       </div>
       <h3>Related articles</h3>
-      {suggest.map(post => (
+      {/*suggest.map(post => (
         <Suggested
           key={post.id}
+          id={post.id}
           title={post.data.title}
           url={post.data.image}
+          setPost={setPost}
         />
-      ))}
+      ))*/}
     </div>
   );
 }

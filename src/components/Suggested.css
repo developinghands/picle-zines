@@ -1,6 +1,7 @@
 .suggest {
   display: flex;
   width: 98%;
+  height: 10vh;
   margin-bottom: 5px;
   padding: 5px;
   cursor: pointer;
