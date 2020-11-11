@@ -21,8 +21,13 @@ export default function Body() {
       <div className="post">
         <Post />
       </div>
+      <h3>Related articles</h3>
       {suggest.map(post => (
-        <Suggested key={post.id} title={post.data.title} url={post.data.image}/>
+        <Suggested
+          key={post.id}
+          title={post.data.title}
+          url={post.data.image}
+        />
       ))}
     </div>
   );
