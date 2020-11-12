@@ -5,27 +5,39 @@ import Suggested from "./Suggested";
 
 export default function Body() {
   const [suggest, setSuggest] = useState([]);
-  const [newPost, setNewPost] = useState("");
+  const [newPost, setNewPost] = useState([]);
   useEffect(() => {
-    db.collection("news").get().then(snapshot =>
-      setSuggest(
-        snapshot.docs.map(doc => ({
-          id: doc.id,
-          data: doc.data()
-        }))
+    console.log("Body.js called")
+    db.collection("news")
+      .get()
+      .then(snapshot =>
+        setSuggest(
+          snapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data()
+          }))
+        )
       )
-    );
+      .catch(error => {
+        console.error("Error: ", error);
+      });
   }, []);
-  function setPost(postId) {
-    setNewPost(postId);
-  }
+  const setPost = postId => {
+    console.log("Recieved new Post Data...");
+    suggest.map(post => {
+      if (post.id == postId) {
+        setNewPost(post);
+        console.log("New Post State Updated...", newPost);
+      }
+    });
+  };
   return (
     <div className="body">
       <div className="post">
-        <Post id={newPost}/>
+        <Post id={newPost} />
       </div>
       <h3>Related articles</h3>
-      {/*suggest.map(post => (
+      {suggest.map(post => (
         <Suggested
           key={post.id}
           id={post.id}
@@ -33,7 +45,7 @@ export default function Body() {
           url={post.data.image}
           setPost={setPost}
         />
-      ))*/}
+      ))}
     </div>
   );
 }

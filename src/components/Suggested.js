@@ -14,14 +14,15 @@ export default function Suggested({ id, url, title, setPost }) {
         setImage(image);
       });
   }
-  function loadPost(postId) {
-    setPost(postId);
-  }
+  const loadPost = () => {
+    console.log("Suggested Article Clicked");
+    setPost(id);
+  };
   return url ? (
-    <div className="suggest" onClick={loadPost(id)}>
+    <button className="suggest" onClick={loadPost}>
       <img src={image} />
       <p>{title}</p>
-    </div>
+    </button>
   ) : (
     <div className="nothing">nothing</div>
   );

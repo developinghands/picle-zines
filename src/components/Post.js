@@ -1,28 +1,32 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
-import {db} from "../firebase";
+import { db } from "../firebase";
 
-export default function Body({ id  }) {
+export default function Body({ post }) {
   const [data, setData] = useState("");
-  loadPost();
-  function loadPost(){
-    if(id){
-      console.log("came here")
-      db.collection("news").where('__name__','==','u8AtExHub9H2A3jye2td').get().then(
-        (snap) => {
-          setData(snap.docs.map((doc) => ({ 
-            id: doc.id,
-            data: doc.data()})))
-        }
-      );    
-    }else{
-      console.log("blank id")
+
+  useEffect(() => {
+    console.log("Post.js Called");
+    if (post) {
+      db.collection("news")
+        .where("__name__", "==", "u8AtExHub9H2A3jye2td")
+        .get()
+        .then(snap => {
+          setData(
+            snap.docs.map(doc => ({
+              id: doc.id,
+              data: doc.data()
+            }))
+          );
+        });
+    } else {
+      console.log("No Post Data Found, loading dummy data... ");
     }
-  }
+  }, []);
   return (
     <div className="post_box">
       <div className="post_header">
-        <h3>{data ? data.title : "Dummy Title"}</h3>
+        <h3>{post ? post.data.title : "Dummy Title"}</h3>
         <p>
           Author : Nikhil Mishra <span className="date">| 08-Nov-2020</span>
         </p>
