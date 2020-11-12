@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./Post.css";
 import storage, { db } from "../firebase";
 
-export default function Post({id}){
+export default function Post({ id }) {
   const [data, setData] = useState([]);
-
+  const [image, setImage] = useState([]);
   useEffect(() => {
     console.log("Post.js Called");
     if (id) {
       db.collection("news")
-        .where('__name__','==',id)
+        .where("__name__", "==", id)
         .get()
         .then(snap => {
           setData(
@@ -18,25 +18,41 @@ export default function Post({id}){
               data: doc.data()
             }))
           );
-        }).catch(error => console.error("Error: ",error));
+        })
+        .catch(error => console.error("Error: ", error));
     } else {
       console.log("No Post Data Found, loading dummy data... ");
     }
   }, []);
+
   return (
-    <div className="post_box"> 
+    <div className="post_box">
       <div className="post_header">
-        {data.map(doc => <h3>{doc.data.title}</h3>)}
-        {data.map(doc => 
-        <p>
-          Author : {doc.data.author} <span className="date">| {doc.data.date}</span>
-        </p>)}
+        {data.map(doc => (
+          <h3>{doc.data.title}</h3>
+        ))}
+        {data.map(doc => (
+          <p>
+            Author : {doc.data.author}{" "}
+            <span className="date">| {doc.data.date}</span>
+          </p>
+        ))}
       </div>
       <div className="post_body">
-        <img src="https://ik.imagekit.io/demo/default-image.jpg" />
-        {data.map(doc => <p className="post_message">
-         {doc.data.article}
-        </p>)}
+        {data.map(doc => {
+          storage
+            .ref()
+            .child(`${doc.data.image}`)
+            .getDownloadURL()
+            .then(snap => setImage(snap))
+            .catch(error => console.error("Error: ", error));
+        })}
+        <img src={image} />
+
+        {console.log(image)}
+        {data.map(doc => (
+          <p className="post_message">{doc.data.article}</p>
+        ))}
       </div>
     </div>
   );
