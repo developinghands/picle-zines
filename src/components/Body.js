@@ -36,7 +36,7 @@ export default function Body() {
     (
       <div className="body">
         <div className="post">
-          <Post id={newPost}/>
+          <Post key={newPost} id={newPost}/>
         </div> 
         <h3>Related articles</h3>
         {console.log(suggest)}
