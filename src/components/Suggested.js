@@ -12,7 +12,7 @@ export default function Suggested({ id, url, title, setPost }) {
       .getDownloadURL()
       .then(image => {
         setImage(image);
-      });
+      }).catch(error => console.log(error));
   }
   const loadPost = () => {
     console.log("Suggested Article Clicked");
