@@ -1,11 +1,11 @@
 .suggest {
   display: flex;
   width: 98%;
-  height: 10vh;
+  min-height: 10vh;
   margin-bottom: 5px;
   padding: 5px;
   cursor: pointer;
-  background-color: #e4dcdc;
+  background-color: #e4dcdc73;
   align-items: center;
   border: none;
 }
