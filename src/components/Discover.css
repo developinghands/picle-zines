@@ -3,17 +3,25 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .block {
   margin-top: 10px;
-  margin-right: 10px;
+
   background-color: #f3767079;
   text-align: center;
-  min-width: 44vw;
-  max-width: 44vw;
+  min-width: 42vw;
+  max-width: 42vw;
   min-height: 20vh;
   max-height: 20vh;
   line-height: 20vh;
-  flex-basis: content;
+  cursor: pointer;
+  border-radius: 10px 10px 0 10px;
+}
+.block:hover {
+  box-shadow: 0px 4px 12px 1px rgba(51, 11, 17, 0.404);
+}
+.suggestedBlock{
+  flex: 1;
+  margin-top: 10px;
 }
