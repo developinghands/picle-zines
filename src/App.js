@@ -6,7 +6,7 @@ import Discover from "./components/Discover";
 import Footer from "./components/Footer";
 
 export default function App() {
-  const [feed, setFeed] = useState(false);
+  const [feed, setFeed] = useState(true);
   const changeView = load => {
     if (!load) {
       setFeed(false);
