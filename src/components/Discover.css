@@ -1,0 +1,19 @@
+.discover {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.block {
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: #f3767079;
+  text-align: center;
+  min-width: 44vw;
+  max-width: 44vw;
+  min-height: 20vh;
+  max-height: 20vh;
+  line-height: 20vh;
+  flex-basis: content;
+}
