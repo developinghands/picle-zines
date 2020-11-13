@@ -7,11 +7,14 @@ export default function Body() {
   const [suggest, setSuggest] = useState([]);
   const [newPost, setNewPost] = useState("");
   useEffect(() => {
-    console.log("Body.js called");                              //body.js calling
-    db.collection("news")                                       //firebase collection
+    console.log("Body.js called"); //body.js calling
+    db.collection("news")
+      .orderBy("date")
+      .limit(5) //firebase collection
       .get()
       .then(snapshot =>
-        setSuggest(                                             //set suggest
+        setSuggest(
+          //set suggest
           snapshot.docs.map(doc => ({
             id: doc.id,
             data: doc.data()
@@ -19,15 +22,15 @@ export default function Body() {
         )
       )
       .catch(error => {
-        console.error("Error: ", error);                        //error
+        console.error("Error: ", error); //error
       });
   }, []);
-  const setPost = (postId) => {
-    console.log("Recieved new Post Data...");                   //console
+  const setPost = postId => {
+    console.log("Recieved new Post Data..."); //console
     suggest.map(post => {
       if (post.id == postId) {
         setNewPost(postId);
-        console.log("New Post State Updated...", newPost);      //console
+        console.log("New Post State Updated...", newPost); //console
       }
     });
   };
@@ -36,8 +39,8 @@ export default function Body() {
     (
       <div className="body">
         <div className="post">
-          <Post key={newPost} id={newPost}/>
-        </div> 
+          <Post key={newPost} id={newPost} />
+        </div>
         <h3>Related articles</h3>
         {console.log(suggest)}
         {suggest.map(post => (
@@ -54,7 +57,7 @@ export default function Body() {
   ) : (
     <div className="body">
       <div className="post">{/*<Post id={newPost} />*/}</div>
-      <h3>Related articles</h3>
+      <h3>Latest articles</h3>
       {suggest.map(post => (
         <Suggested
           key={post.id}
