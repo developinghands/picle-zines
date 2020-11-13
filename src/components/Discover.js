@@ -74,7 +74,7 @@ export default function Discover() {
           />
           </div>
         ))
-      ) : <div className="post"><Post key={newPost} id={newPost}/></div>
+      ) : <div className="postSection"><Post key={newPost} id={newPost}/></div>
       }
     </div>
   );

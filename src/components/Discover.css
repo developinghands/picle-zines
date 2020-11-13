@@ -7,7 +7,6 @@
 }
 .block {
   margin-top: 10px;
-
   background-color: #f3767079;
   text-align: center;
   min-width: 42vw;
@@ -24,4 +23,9 @@
 .suggestedBlock{
   flex: 1;
   margin-top: 10px;
+}
+.postSection{
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px;
 }
